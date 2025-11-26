@@ -10,24 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6b109fa-8320-4c9f-96e8-edbd771db127" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.0-milestone-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/akyljer/AkylJerApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/akyljer/AkylJerApp.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
