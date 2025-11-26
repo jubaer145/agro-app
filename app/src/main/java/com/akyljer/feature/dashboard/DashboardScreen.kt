@@ -19,11 +19,13 @@ import com.akyljer.navigation.Destinations
 @Composable
 fun DashboardScreen(onNavigate: (String) -> Unit) {
     val entries = listOf(
-        "Crop Advisor" to Destinations.Advisor.route,
-        "Photo Doctor" to Destinations.PhotoDoctor.route,
-        "Weather & Risk" to Destinations.Weather.route,
-        "AgroVet" to Destinations.AgroVet.route,
-        "Alerts / Tasks" to Destinations.Alerts.route
+        "👤 Farmer Profile" to Destinations.FarmerProfile.route,
+        "🌾 My Fields" to Destinations.FieldsList.route,
+        "🧠 Smart Farming" to Destinations.SmartFarming.route,
+        "🌦️ Weather & Risk" to Destinations.Weather.route,
+        "🐄 AgroVet" to Destinations.AgroVet.route,
+        "🔔 Alerts / Tasks" to Destinations.Alerts.route,
+        "⚙️ Settings" to Destinations.Settings.route
     )
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(16.dp),

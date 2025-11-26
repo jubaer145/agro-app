@@ -17,13 +17,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AkylJerApp()
+            AkylJerAppScreen()
         }
     }
 }
 
 @Composable
-private fun AkylJerApp() {
+private fun AkylJerAppScreen() {
     AkylJerTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             val navController = rememberNavController()

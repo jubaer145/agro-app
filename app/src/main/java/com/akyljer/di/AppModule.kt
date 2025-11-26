@@ -1,5 +1,6 @@
 package com.akyljer.di
 
+import android.app.Application
 import androidx.room.Room
 import com.akyljer.core.db.AppDatabase
 import com.akyljer.core.network.WeatherApi
@@ -12,21 +13,19 @@ import com.akyljer.core.repository.TaskRepository
 import com.akyljer.core.repository.TaskRepositoryImpl
 import com.akyljer.core.repository.WeatherRepository
 import com.akyljer.core.repository.WeatherRepositoryImpl
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
-import android.app.Application
-import okhttp3.MediaType.Companion.toMediaType
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -63,7 +62,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
+    fun provideRetrofitBuilder(client: OkHttpClient): Retrofit.Builder {
         val json = Json { ignoreUnknownKeys = true }
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
@@ -73,8 +72,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideWeatherApi(retrofit: Retrofit): WeatherApi =
-        WeatherApiFactory.create("https://example.com/", retrofit)
+    fun provideWeatherApi(retrofitBuilder: Retrofit.Builder): WeatherApi =
+        WeatherApiFactory.create("https://example.com/", retrofitBuilder)
 
     @Provides
     @Singleton
