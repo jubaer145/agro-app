@@ -3,20 +3,12 @@ package com.akyljer.ui.features.photodoctor
 import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -30,24 +22,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import java.io.File
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * Photo Doctor Screen with Real-Time Camera Integration
@@ -72,13 +57,7 @@ fun PhotoDoctorScreen(
     val diagnosisResult by viewModel.diagnosisResult.collectAsState()
     val isModelReady by viewModel.isModelReady.collectAsState()
     
-    // Camera permissions
-    val cameraPermissionState = rememberMultiplePermissionsState(
-        permissions = listOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-    )
+    val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     
     var showCamera by remember { mutableStateOf(false) }
     var capturedBitmap by remember { mutableStateOf<Bitmap?>(null) }
@@ -104,9 +83,9 @@ fun PhotoDoctorScreen(
                 .padding(padding)
         ) {
             when {
-                !cameraPermissionState.allPermissionsGranted -> {
+                !cameraPermissionState.status.isGranted -> {
                     PermissionRequestScreen(
-                        onRequestPermissions = { cameraPermissionState.launchMultiplePermissionRequest() }
+                        onRequestPermissions = { cameraPermissionState.launchPermissionRequest() }
                     )
                 }
                 
@@ -146,10 +125,10 @@ fun PhotoDoctorScreen(
                         isModelReady = isModelReady,
                         uiState = uiState,
                         onTakePhoto = {
-                            if (cameraPermissionState.allPermissionsGranted) {
+                            if (cameraPermissionState.status.isGranted) {
                                 showCamera = true
                             } else {
-                                cameraPermissionState.launchMultiplePermissionRequest()
+                                cameraPermissionState.launchPermissionRequest()
                             }
                         },
                         onPickFromGallery = { uri ->
@@ -213,7 +192,7 @@ fun MainPhotoScreen(
         uri?.let { onPickFromGallery(it) }
     }
     val diagnosisHistory by viewModel.diagnosisHistory.collectAsState(initial = emptyList())
-
+    
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -430,7 +409,7 @@ fun DiagnosisHistoryCard(diagnosis: com.akyljer.data.local.entity.PhotoDiagnosis
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            SeverityBadge(diagnosis.severity ?: "")
+            SeverityBadge(diagnosis.severity ?: "N/A")
         }
     }
 }
@@ -468,7 +447,7 @@ fun PermissionRequestScreen(onRequestPermissions: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
-            Icons.Default.Camera,
+            Icons.Default.CameraAlt,
             contentDescription = null,
             modifier = Modifier.size(64.dp),
             tint = MaterialTheme.colorScheme.primary

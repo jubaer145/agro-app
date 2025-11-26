@@ -12,7 +12,7 @@ import com.akyljer.feature.alerts.AlertsScreen
 import com.akyljer.feature.dashboard.DashboardScreen
 import com.akyljer.feature.fields.FieldDetailScreen
 import com.akyljer.feature.fields.FieldsListScreen
-import com.akyljer.feature.photodoctor.PhotoDoctorScreen
+import com.akyljer.ui.features.photodoctor.PhotoDoctorScreen
 import com.akyljer.feature.profile.FarmerProfileScreen
 import com.akyljer.feature.settings.SettingsScreen
 import com.akyljer.feature.smartfarming.SmartFarmingScreen
@@ -109,7 +109,10 @@ fun AppNavHost(navController: NavHostController) {
 
         // Photo Doctor
         composable(Destinations.PhotoDoctor.route) {
-            PhotoDoctorScreen(viewModel = hiltViewModel())
+            PhotoDoctorScreen(
+                onNavigateBack = { navController.popBackStack() },
+                viewModel = hiltViewModel()
+            )
         }
 
         // Weather & Risk
