@@ -1,4 +1,4 @@
-# ========================================
+git # ========================================
 # Акыл Жер Android Project - Git Ignore
 # ========================================
 
@@ -232,3 +232,8 @@ atlassian-ide-plugin.xml
 # ============ Build Caches ============
 .caches/
 kspCaches/
+
+# ============ Documentation Files ============
+# Ignore all markdown files except README.md
+*.md
+!README.md
